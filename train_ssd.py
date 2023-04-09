@@ -71,6 +71,8 @@ parser.add_argument('--gamma', default=0.1, type=float,
                     help='Gamma update for SGD')
 parser.add_argument('--base-net-lr', default=0.001, type=float,
                     help='initial learning rate for base net, or None to use --lr')
+parser.add_argument('--nesterov', default=False, type=bool,
+                    help='Nesterov momentum')
 parser.add_argument('--extra-layers-lr', default=None, type=float,
                     help='initial learning rate for the layers not in base net and prediction heads.')
 
@@ -373,8 +375,8 @@ if __name__ == '__main__':
                              center_variance=0.1, size_variance=0.2, device=DEVICE)
                              
     optimizer = torch.optim.SGD(params, lr=args.lr, momentum=args.momentum,
-                                weight_decay=args.weight_decay)
-                                
+                                weight_decay=args.weight_decay, nesterov=args.nesterov)#added nesterov 20230409
+            
     logging.info(f"Learning rate: {args.lr}, Base net learning rate: {base_net_lr}, "
                  + f"Extra Layers learning rate: {extra_layers_lr}.")
 
