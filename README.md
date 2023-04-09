@@ -7,3 +7,10 @@ This repo implements [SSD (Single Shot MultiBox Detector)](https://arxiv.org/abs
 
 Thanks to @qfgaohao for the upstream implementation from:  [https://github.com/qfgaohao/pytorch-ssd](https://github.com/qfgaohao/pytorch-ssd)
 
+I added a new input,if someone wants to add Nesterov momentum in SGD opt,
+train_ssd.py -> line 375
+optimizer = torch.optim.SGD(params, lr=args.lr, momentum=args.momentum,
+weight_decay=args.weight_decay, nesterov = True)
+
+as Karpathy told in CS231n:
+Nesterov Momentum is a slightly different version of the momentum update that has recently been gaining popularity. It enjoys stronger theoretical converge guarantees for convex functions and in practice it also consistenly works slightly better than standard momentum.
